@@ -21,7 +21,7 @@ namespace Server.Services
                 Id = "loc-seed-1",
                 ShareCode = "LOC-USER-8821",
                 UserId = 1,
-                UserName = "Nguyễn Quang Hưng (User)",
+                UserName = "Hồng Hoàng Khang (User)",
                 UserRole = "User",
                 Latitude = 10.776889,
                 Longitude = 106.700981,

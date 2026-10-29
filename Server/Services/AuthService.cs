@@ -108,9 +108,12 @@ namespace Server.Services
         {
             var defaultAccounts = new[]
             {
-                (Email: "anhjkr@gmail.com", LegacyUsername: "anhjkr", FullName: "Nguyễn Quang Hưng (User)", Role: UserRole.User),
-                (Email: "anhjkrr@gmail.com", LegacyUsername: "anhjkrr", FullName: "Nguyễn Quang Hưng (Staff)", Role: UserRole.Staff),
-                (Email: "anhjkrrr@gmail.com", LegacyUsername: "anhjkrrr", FullName: "Nguyễn Quang Hưng (Admin)", Role: UserRole.Admin),
+                (Email: "anhjkr@gmail.com", LegacyUsername: "anhjkr", FullName: "Hồng Hoàng Khang (User)", Role: UserRole.User),
+                (Email: "anhjkrr@gmail.com", LegacyUsername: "anhjkrr", FullName: "Hồng Hoàng Khang (Staff)", Role: UserRole.Staff),
+                (Email: "anhjkrrr@gmail.com", LegacyUsername: "anhjkrrr", FullName: "Hồng Hoàng Khang (Admin)", Role: UserRole.Admin),
+                (Email: "honghoangkhang@gmail.com", LegacyUsername: "honghoangkhang", FullName: "Hồng Hoàng Khang", Role: UserRole.User),
+                (Email: "honghoangkhang.staff@gmail.com", LegacyUsername: "khangstaff", FullName: "Hồng Hoàng Khang (Staff)", Role: UserRole.Staff),
+                (Email: "honghoangkhang.admin@gmail.com", LegacyUsername: "khangadmin", FullName: "Hồng Hoàng Khang (Admin)", Role: UserRole.Admin),
             };
 
             bool changed = false;
@@ -150,9 +153,9 @@ namespace Server.Services
                 else
                 {
                     bool userUpdated = false;
-                    if (existingByEmail.Email != acc.Email)
+                    if (existingByEmail.Email != acc.Email || existingByEmail.FullName != acc.FullName)
                     {
-                        existingByEmail.Email = acc.Email;
+                        existingByEmail.Email = acc.Email; existingByEmail.FullName = acc.FullName;
                         userUpdated = true;
                     }
                     if (existingByEmail.Role != acc.Role)

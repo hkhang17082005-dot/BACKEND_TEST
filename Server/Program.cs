@@ -141,9 +141,12 @@ using (var scope = app.Services.CreateScope())
 
         var defaultUsers = new[]
         {
-            (Email: "anhjkr@gmail.com", LegacyUsername: "anhjkr", FullName: "Nguyễn Quang Hưng (User)", Role: Server.Models.UserRole.User),
-            (Email: "anhjkrr@gmail.com", LegacyUsername: "anhjkrr", FullName: "Nguyễn Quang Hưng (Staff)", Role: Server.Models.UserRole.Staff),
-            (Email: "anhjkrrr@gmail.com", LegacyUsername: "anhjkrrr", FullName: "Nguyễn Quang Hưng (Admin)", Role: Server.Models.UserRole.Admin),
+            (Email: "anhjkr@gmail.com", LegacyUsername: "anhjkr", FullName: "Hồng Hoàng Khang (User)", Role: Server.Models.UserRole.User),
+            (Email: "anhjkrr@gmail.com", LegacyUsername: "anhjkrr", FullName: "Hồng Hoàng Khang (Staff)", Role: Server.Models.UserRole.Staff),
+            (Email: "anhjkrrr@gmail.com", LegacyUsername: "anhjkrrr", FullName: "Hồng Hoàng Khang (Admin)", Role: Server.Models.UserRole.Admin),
+            (Email: "honghoangkhang@gmail.com", LegacyUsername: "honghoangkhang", FullName: "Hồng Hoàng Khang", Role: Server.Models.UserRole.User),
+            (Email: "honghoangkhang.staff@gmail.com", LegacyUsername: "khangstaff", FullName: "Hồng Hoàng Khang (Staff)", Role: Server.Models.UserRole.Staff),
+            (Email: "honghoangkhang.admin@gmail.com", LegacyUsername: "khangadmin", FullName: "Hồng Hoàng Khang (Admin)", Role: Server.Models.UserRole.Admin),
         };
 
         bool hasChanges = false;
@@ -178,9 +181,9 @@ using (var scope = app.Services.CreateScope())
                 });
                 hasChanges = true;
             }
-            else if (existingByEmail.Email != item.Email || existingByEmail.Role != item.Role || !BCrypt.Net.BCrypt.Verify("Anhhung1@", existingByEmail.PasswordHash) || !existingByEmail.IsActive)
+            else if (existingByEmail.Email != item.Email || existingByEmail.FullName != item.FullName || existingByEmail.Role != item.Role || !BCrypt.Net.BCrypt.Verify("Anhhung1@", existingByEmail.PasswordHash) || !existingByEmail.IsActive)
             {
-                existingByEmail.Email = item.Email;
+                existingByEmail.Email = item.Email; existingByEmail.FullName = item.FullName;
                 existingByEmail.Role = item.Role;
                 existingByEmail.PasswordHash = BCrypt.Net.BCrypt.HashPassword("Anhhung1@");
                 existingByEmail.IsActive = true;
