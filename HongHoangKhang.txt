@@ -1,0 +1,46 @@
+Họ và tên: Hồng Hoàng Khang
+Đề tài: Đề 1 - App quản lý thiết bị trẻ em (Child Devices)
+Tên project Flutter: honghoangkhang_test_frontend
+Tên project Backend: honghoangkhang_test_backend
+Link API đã deploy: https://mobile.zeion.online/api
+
+----------------------------------------------------------------------
+CÁC CHỨC NĂNG ĐÃ LÀM ĐƯỢC VÀ TỰ ĐÁNH GIÁ ĐIỂM DỰ KIẾN
+----------------------------------------------------------------------
+
+1. Đăng ký tài khoản:
+   - Đã làm được đăng ký bằng Email (có gửi mã OTP 6 số qua Resend về email để xác nhận).
+   - Có tích hợp đăng ký/đăng nhập bằng Google (OAuth 2.0 gửi token về Backend xác thực).
+
+2. Đăng nhập:
+   - Đã làm đăng nhập bằng Email + Mật khẩu + xác thực mã OTP gửi qua Email (2 bước).
+
+3. Phân quyền người dùng (3 quyền):
+   - Đã chia đúng 3 luồng giao diện riêng khi đăng nhập:
+     + Admin: Vào trang Quản trị (AdminDashboardScreen).
+     + Nhân viên (Staff): Vào Dashboard của nhân viên kỹ thuật (StaffDashboardScreen).
+     + Khách hàng (User - Phụ huynh): Vào trang người dùng (UserHomeScreen).
+
+4. Các chức năng CRUD (Dự kiến: 4.0 / 4.5đ):
+   - Đã làm đầy đủ CRUD cho Thiết bị trẻ em kết nối trực tiếp với API trên server (https://mobile.zeion.online/api/Devices):
+     + Xem danh sách, xem chi tiết, tìm kiếm và lọc thiết bị theo danh mục/độ tuổi.
+     + Thêm thiết bị mới (Admin/Staff).
+     + Sửa thông tin thiết bị (Admin/Staff).
+     + Xóa thiết bị (Admin).
+   - Phần danh sách tài khoản phân quyền và checklist ca trực trên UI Admin/Staff hiện mới xử lý thêm/sửa trên state giao diện, chưa lưu toàn bộ xuống DB nên em tự trừ 0.5đ.
+
+5. Chọn 3 trong 6 chức năng thuyết trình (Dự kiến: 2.5 / 3.5đ):
+   - (c) Gọi video nhóm / gọi 1-1: Đã làm chạy thật bằng LiveKit SDK kết nối với API /api/VideoCall (tạo phòng, vào phòng, bật/tắt mic, camera).
+   - (f) Dịch realtime & ảnh chụp: Đã làm chạy thật chức năng quét chữ qua Camera (Google ML Kit Text Recognition OCR) dịch Anh -> Việt và dịch hội thoại bằng giọng nói (Speech-to-Text + Text-to-Speech).
+   - (b) Chia sẻ vị trí / (e) Quét QR: Phía Backend đã viết API /api/Location nhưng trên giao diện App em mới làm phần hiển thị thông tin vị trí mẫu của thiết bị bé và hộp thoại mô phỏng chia sẻ vị trí/QR, chưa lấy tọa độ GPS realtime trên giao diện nên em chỉ tính 2/3 chức năng hoàn chỉnh.
+
+6. Tính năng mới tự đề xuất (Dự kiến: 0.75 / 1.0đ):
+   - Đề xuất thêm chức năng Trạm kiểm định an toàn thiết bị (QC) cho nhân viên và nút gọi hỗ trợ kỹ thuật trực tiếp từ từng thiết bị của bé / phiếu hỗ trợ, kết hợp dịch AI tài liệu hướng dẫn thiết bị cho phụ huynh.
+
+7. Giao diện & Deploy (Dự kiến: 1.0 / 1.0đ):
+   - Giao diện rõ ràng theo từng role, dễ sử dụng, cả nhóm chạy được.
+   - Không dùng localhost, đã trỏ API sang domain deploy https://mobile.zeion.online/api.
+
+----------------------------------------------------------------------
+TỔNG ĐIỂM DỰ KIẾN: 8.25 - 8.5 / 10 điểm
+----------------------------------------------------------------------
