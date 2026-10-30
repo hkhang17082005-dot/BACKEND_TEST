@@ -36,11 +36,12 @@ MỤC 1 & 2: ĐĂNG KÝ VÀ ĐĂNG NHẬP (LẦN ĐẦU & LẦN SAU)
 - Thực tế đã làm được:
   + Đăng ký: Nhập email, họ tên, mật khẩu -> Gửi mã xác thực OTP 6 số qua dịch vụ Resend Email thật về hộp thư -> Xác thực OTP hợp lệ mới hoàn tất tạo tài khoản trong cơ sở dữ liệu VPS. Có tích hợp luồng Google Sign-In backend.
   + Đăng nhập lần đầu: Nhập Email + Mật khẩu -> Hệ thống gửi OTP xác nhận 2 lớp về Email -> Xác thực đúng OTP mới cấp Access Token và lưu vào SharedPreferences.
-  + Đăng nhập lần sau: Hệ thống nhận diện tài khoản đã từng đăng nhập, hiển thị khối "Đăng nhập Vân Tay & Face ID (Lần sau)". Nhấn "Quét vân tay" gọi trực tiếp API Backend VPS: POST /api/Auth/biometric-login, máy chủ xác thực thành công trả về Access Token mới và User profile, tự động chuyển thẳng vào Dashboard theo phân quyền.
+  + Đăng nhập lần sau: Hệ thống nhận diện tài khoản đã từng đăng nhập, hiển thị khối "Vân Tay Galaxy Tab S9 & Face ID". Nhấn "Quét vân tay" kích hoạt trực tiếp phần cứng cảm biến vân tay trên màn hình máy Samsung Galaxy Tab S9 (qua package local_auth & FlutterFragmentActivity). Khi người dùng chạm vân tay vật lý trên màn hình Tab S9 thành công, ứng dụng gọi API Backend VPS: POST /api/Auth/biometric-login, máy chủ xác thực thành công trả về Access Token mới và User profile, tự động chuyển thẳng vào Dashboard theo phân quyền.
+  + Tích hợp sẵn nút "Kiểm Tra Cảm Biến Vân Tay Máy" trong mục Cài Đặt (Settings) để trực tiếp test phần cứng vân tay Samsung Galaxy Tab S9 bất kỳ lúc nào.
   + Có sẵn 3 nút "Điền nhanh tài khoản" cho 3 Role (User, Staff, Admin) giúp Thầy/Cô và Hội đồng kiểm tra nhanh chóng không mất thời gian gõ phím.
 - Điểm chân thật:
   + Cơ chế OTP và lưu trữ Token: 100% API thật trên server VPS.
-  + Cơ chế Vân tay (Touch ID) / Face ID: 100% kết nối API Backend VPS thật (POST /api/Auth/biometric-login) kết hợp giao diện quét radar sinh trắc học chuẩn Mobile.
+  + Cơ chế Vân tay (Touch ID) / Face ID: 100% phần cứng thật của máy Samsung Galaxy Tab S9 (Android BiometricPrompt) kết hợp kết nối API Backend VPS thật (POST /api/Auth/biometric-login).
 
 ----------------------------------------------------------------------
 MỤC 3: PHÂN QUYỀN 3 VAI TRÒ NGƯỜI DÙNG
