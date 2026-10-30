@@ -1,114 +1,65 @@
-======================================================================
-BẢN BÁO CÁO & TỰ ĐÁNH GIÁ CHẤM ĐIỂM DỰ ÁN (CHÂN THẬT - MINH BẠCH)
-MÔN HỌC: LẬP TRÌNH DI ĐỘNG (LTDD) - ĐỀ KIỂM TRA 40%
-======================================================================
+BÁO CÁO DỰ ÁN BÀI KIỂM TRA (40%)
+Môn học: Lập trình di động
 
-1. THÔNG TIN SINH VIÊN & ĐỀ TÀI:
-- Họ và tên: Hồng Hoàng Khang
-- Đề tài lựa chọn: Đề 1 - Ứng dụng Quản lý Điện thoại & Thiết bị Trẻ em (Khang KidSafe)
-- Tên Project Frontend (Flutter): honghoangkhang_test_frontend
-- Tên Project Backend (C# .NET): honghoangkhang_test_backend
-- Địa chỉ API Backend chính thức đã Deploy (VPS): https://mobile.zeion.online/api
-- Địa chỉ SFU Cloud Video Call (LiveKit): wss://omnicaller-52xusnar.livekit.cloud
-- Tuyệt đối KHÔNG sử dụng localhost (Đạt 100% nguyên tắc kiểm tra).
+1. THÔNG TIN CHUNG
+- Sinh viên thực hiện: Hồng Hoàng Khang
+- Đề tài lựa chọn: Đề 1 - Quản lý thiết bị và điện thoại trẻ em (Khang KidSafe)
+- Tên project Frontend: honghoangkhang_test_frontend (Flutter)
+- Tên project Backend: honghoangkhang_test_backend (C# ASP.NET Core)
+- Địa chỉ API VPS: https://mobile.zeion.online/api (chạy 24/7 trên VPS riêng, không dùng localhost)
+- Thiết bị test: Samsung Galaxy Tab S9 (Android 14)
 
-======================================================================
-BẢNG TỰ CHẤM ĐIỂM CHÂN THẬT THEO THANG ĐIỂM ĐỀ BÀI:
-======================================================================
-| STT | Nội dung yêu cầu đề bài                         | Thang điểm | Điểm tự chấm | Mức độ hoàn thành thực tế              |
-|-----|-------------------------------------------------|------------|--------------|-----------------------------------------|
-| 1   | Đăng ký tài khoản (Email OTP / OAuth 2.0)       |   (Phụ)    |     Đạt      | 100% chạy thật (Gửi email OTP thật)     |
-| 2   | Đăng nhập (Mật khẩu/OTP; Lần sau Face ID/Touch) |   (Phụ)    |     Đạt      | 100% (OTP thật + Biometric Scanner UI)  |
-| 3   | Phân quyền 3 vai trò (Admin, Staff, User)       |   (Phụ)    |     Đạt      | 100% phân chia 3 Dashboard độc lập      |
-| 4   | Các chức năng CRUD hệ thống                     |   4.5 đ    |    4.5 đ     | 100% kết nối API VPS cho 6 đối tượng    |
-| 5   | Chọn 3 trong 6 chức năng thuyết trình           |   3.5 đ    |    3.5 đ     | 100% (Video Call SFU + Dịch OCR + GPS)  |
-| 6   | Tính năng mới độc đáo tự đề xuất                |   1.0 đ    |    1.0 đ     | Trạm kiểm định an toàn thiết bị cho bé  |
-| 7   | Giao diện đẹp, Cài đặt cá nhân hóa, Deploy VPS  |   1.0 đ    |    1.0 đ     | Đổi cỡ chữ, màu nền, VPS no-localhost   |
-----------------------------------------------------------------------
-TỔNG ĐIỂM TỰ ĐÁNH GIÁ CHÂN THẬT: 10 / 10 ĐIỂM (Hoặc 9.75/10 điểm nếu Hội đồng chấm khắt khe phần phần cứng sinh trắc học)
-======================================================================
+2. TÀI KHOẢN TEST SẴN
+Màn hình đăng nhập đã có sẵn 3 nút điền nhanh tài khoản để tiện chấm bài:
+- Tài khoản Phụ huynh (User): anhjkr@gmail.com / Mật khẩu: 123456
+- Tài khoản Kỹ thuật viên (Staff): anhjkrr@gmail.com / Mật khẩu: 123456
+- Tài khoản Quản trị viên (Admin): anhjkrrr@gmail.com / Mật khẩu: 123456
 
-CHI TIẾT ĐÁNH GIÁ TỪNG PHẦN THEO MÃ NGUỒN THỰC TẾ:
+3. CHI TIẾT CÁC CHỨC NĂNG ĐÃ LÀM
 
-----------------------------------------------------------------------
-MỤC 1 & 2: ĐĂNG KÝ VÀ ĐĂNG NHẬP (LẦN ĐẦU & LẦN SAU)
-----------------------------------------------------------------------
-- Thực tế đã làm được:
-  + Đăng ký: Nhập email, họ tên, mật khẩu -> Gửi mã xác thực OTP 6 số qua dịch vụ Resend Email thật về hộp thư -> Xác thực OTP hợp lệ mới hoàn tất tạo tài khoản trong cơ sở dữ liệu VPS. Có tích hợp luồng Google Sign-In backend.
-  + Đăng nhập lần đầu: Nhập Email + Mật khẩu -> Hệ thống gửi OTP xác nhận 2 lớp về Email -> Xác thực đúng OTP mới cấp Access Token và lưu vào SharedPreferences.
-  + Đăng nhập lần sau: Hệ thống nhận diện tài khoản đã từng đăng nhập, hiển thị khối "Vân Tay Galaxy Tab S9 & Face ID". Nhấn "Quét vân tay" kích hoạt trực tiếp phần cứng cảm biến vân tay trên màn hình máy Samsung Galaxy Tab S9 (qua package local_auth & FlutterFragmentActivity). Khi người dùng chạm vân tay vật lý trên màn hình Tab S9 thành công, ứng dụng gọi API Backend VPS: POST /api/Auth/biometric-login, máy chủ xác thực thành công trả về Access Token mới và User profile, tự động chuyển thẳng vào Dashboard theo phân quyền.
-  + Tích hợp sẵn nút "Kiểm Tra Cảm Biến Vân Tay Máy" trong mục Cài Đặt (Settings) để trực tiếp test phần cứng vân tay Samsung Galaxy Tab S9 bất kỳ lúc nào.
-  + Có sẵn 3 nút "Điền nhanh tài khoản" cho 3 Role (User, Staff, Admin) giúp Thầy/Cô và Hội đồng kiểm tra nhanh chóng không mất thời gian gõ phím.
-- Điểm chân thật:
-  + Cơ chế OTP và lưu trữ Token: 100% API thật trên server VPS.
-  + Cơ chế Vân tay (Touch ID) / Face ID: 100% phần cứng thật của máy Samsung Galaxy Tab S9 (Android BiometricPrompt) kết hợp kết nối API Backend VPS thật (POST /api/Auth/biometric-login).
+a. Đăng ký và Đăng nhập (OTP + Vân tay phần cứng)
+- Đăng ký: Nhập email, họ tên, mật khẩu. Hệ thống gửi mã OTP 6 số về hòm thư thật (dịch vụ Resend) để xác nhận trước khi lưu vào database.
+- Đăng nhập lần đầu: Nhập email + mật khẩu, sau đó nhập OTP xác thực bước hai gửi về email.
+- Đăng nhập lần sau: Bấm nút "Quét vân tay", app sẽ gọi trực tiếp cảm biến vân tay dưới màn hình của máy Samsung Galaxy Tab S9 (dùng package local_auth và cấu hình FlutterFragmentActivity). Khi ngón tay xác thực đúng, app gửi mã xác thực lên API VPS (/api/Auth/biometric-login) để lấy Access Token và mở thẳng Dashboard tương ứng.
+- Trong màn hình Cài đặt cũng có sẵn nút "Kiểm Tra Cảm Biến Vân Tay Máy" để test trực tiếp phần cứng của tablet.
 
-----------------------------------------------------------------------
-MỤC 3: PHÂN QUYỀN 3 VAI TRÒ NGƯỜI DÙNG
-----------------------------------------------------------------------
-- Thực tế đã làm được:
-  + Phụ huynh (USER - anhjkr@gmail.com): Mở UserHomeScreen gồm 5 tab chức năng: Giám sát bé, Kho thiết bị, Gọi video gia đình, Dịch học tập AI, và Quản lý hồ sơ gia đình.
-  + Kỹ thuật viên (STAFF - anhjkrr@gmail.com): Mở StaffDashboardScreen gồm: Tổng quan ca trực, Đơn hàng kỹ thuật, Trạm kiểm định an toàn phần cứng (QC), Tổng đài LiveKit CSKH, và Checklist ca trực.
-  + Quản trị viên (ADMIN - anhjkrrr@gmail.com): Mở AdminDashboardScreen gồm: Chỉ số tổng quan hệ thống, Quản trị thiết bị toàn diện (CRUD), Phân quyền người dùng (User Management), và Doanh số bán hàng.
-- Điểm chân thật: 100% phân chia giao diện và quyền hạn chặt chẽ, kiểm tra Header X-User-Role và Bearer Token ở cả Frontend và Backend.
+b. Phân quyền 3 vai trò
+- User (Phụ huynh): Xem danh sách thiết bị của con, xem kho thiết bị bán, gọi video cho bé/kỹ thuật, dùng công cụ dịch ảnh bài tập, xem và đổi thông tin cá nhân.
+- Staff (Kỹ thuật viên): Quản lý đơn hàng thiết bị, trạm kiểm định an toàn phần cứng (Hardware QC), danh sách nhiệm vụ ca trực.
+- Admin (Quản trị viên): Xem bảng số liệu tổng quan, quản lý danh mục thiết bị, phân quyền đổi role cho người dùng trong hệ thống.
 
-----------------------------------------------------------------------
-MỤC 4: CÁC CHỨC NĂNG CRUD (ĐẠT 4.5 / 4.5 ĐIỂM)
-----------------------------------------------------------------------
-Dự án đã triển khai đầy đủ cả 4 thao tác Create - Read - Update - Delete trên 6 đối tượng:
-1. CRUD Thiết bị trẻ em (Devices):
-   - Kết nối trực tiếp API Backend VPS: /api/Devices (GET, POST, PUT, DELETE).
-   - Đầy đủ thông số: Tên thiết bị, hãng sản xuất, model, độ tuổi sử dụng, dung lượng pin, giá bán, tồn kho.
-2. CRUD Đơn hàng & Gói dịch vụ (Orders):
-   - Kết nối trực tiếp API Backend VPS: /api/Orders (GET, POST, PUT, DELETE).
-   - Phụ huynh đặt mua thiết bị/gói bảo vệ; Kỹ thuật viên & Admin cập nhật trạng thái đơn (Pending -> Confirmed -> Shipping -> Delivered) hoặc Hủy đơn.
-3. CRUD Đánh giá & Nhận xét (Reviews):
-   - Kết nối trực tiếp API Backend VPS: /api/Reviews (GET, POST, PUT, DELETE).
-   - Phụ huynh viết nhận xét 1-5 sao; xem danh sách công khai; sửa bình luận; xóa đánh giá.
-4. CRUD Tài khoản & Phân quyền (Users):
-   - Kết nối trực tiếp API Backend VPS: /api/Auth/users và /api/Auth/users/{id}/role (GET, POST, PUT).
-   - Admin tải danh sách người dùng thực tế từ SQLite VPS; đổi vai trò trực tiếp (ADMIN, STAFF, USER) lưu thẳng xuống Database; thêm mới tài khoản.
-5. CRUD Thiết bị của bé đang giám sát (Monitored Devices):
-   - Tạo hồ sơ bé, sửa thông tin, giới hạn thời gian sử dụng màn hình, xóa/hủy liên kết thiết bị.
-6. CRUD Ca trực kỹ thuật (Staff Duties):
-   - Thêm nhiệm vụ ca trực, xem danh sách, đánh dấu hoàn thành, chỉnh sửa và xóa nhiệm vụ.
+c. Các chức năng CRUD (4.5 điểm)
+Đã hoàn thành cả 4 thao tác Tạo - Đọc - Sửa - Xóa qua API VPS cho 6 phần:
+1. Thiết bị trẻ em (Devices): Xem danh sách, lọc, thêm thiết bị mới, cập nhật giá/pin/model, xóa thiết bị khỏi kho.
+2. Đơn hàng (Orders): Phụ huynh đặt mua thiết bị; Kỹ thuật viên và Admin cập nhật trạng thái giao dịch hoặc hủy đơn.
+3. Đánh giá (Reviews): Xem đánh giá theo thiết bị, gửi bình luận và chấm điểm sao, chỉnh sửa hoặc xóa đánh giá.
+4. Tài khoản (Users): Admin lấy danh sách tài khoản từ database SQLite trên VPS, đổi vai trò người dùng (User/Staff/Admin), tạo mới tài khoản.
+5. Thiết bị bé đang dùng (Monitored Devices): Thêm hồ sơ bé, cài đặt giới hạn thời gian màn hình, sửa thông tin hoặc xóa thiết bị theo dõi.
+6. Nhiệm vụ ca trực (Staff Duties): Kỹ thuật viên tạo đầu việc ca trực, đánh dấu hoàn thành, sửa nội dung hoặc xóa nhiệm vụ.
 
-----------------------------------------------------------------------
-MỤC 5: 3 TRONG 6 CHỨC NĂNG THUYẾT TRÌNH (ĐẠT 3.5 / 3.5 ĐIỂM)
-----------------------------------------------------------------------
-1. Chức năng (c) - Gọi Video Call nhóm & gọi 1-1:
-   - CHẠY THẬT 100%: Kết nối LiveKit SFU Cloud Server (wss://omnicaller-52xusnar.livekit.cloud) qua API /api/VideoCall.
-   - Hỗ trợ tạo phòng, vào phòng bằng Token ký bởi LiveKit Server SDK, bật/tắt Camera, Micro, đổi Camera trước/sau, lưới người tham gia (Participant Grid).
-2. Chức năng (f) - Dịch Realtime & Ảnh chụp thông minh:
-   - CHẠY THẬT 100%: Tích hợp Google ML Kit Text Recognition (OCR) quét chữ tiếng Anh từ Camera hoặc thư viện ảnh -> Dịch tự động sang Tiếng Việt -> Phát âm giọng đọc Text-to-Speech (TTS).
-   - Hỗ trợ dịch hội thoại 2 chiều bằng giọng nói (Speech-to-Text).
-3. Chức năng (b) & (e) - Chia sẻ vị trí GPS & Quét QR Code ghép đôi:
-   - Hiển thị tọa độ GPS phụ huynh, khoảng cách tới bé, vùng an toàn SafeZone, nút phát sóng tọa độ đón bé qua API /api/Location/share và mã QR ma trận để đồng hồ của bé quét ghép đôi.
+d. 3 chức năng chọn từ phần thuyết trình (3.5 điểm)
+1. Gọi Video Call nhóm và 1-1: Kết nối LiveKit SFU Cloud Server, hỗ trợ mở/tắt camera, micro, đổi camera trước/sau, hiển thị lưới người tham gia cuộc gọi.
+2. Dịch ảnh & giọng nói: Dùng Google ML Kit nhận dạng chữ (OCR) chụp từ camera hoặc thư viện ảnh, dịch văn bản tiếng Anh sang tiếng Việt và phát âm qua Text-to-Speech (TTS).
+3. Chia sẻ vị trí & Ghép đôi: Hiển thị tọa độ GPS, cảnh báo vùng an toàn (SafeZone), phát tín hiệu đón con và tạo mã QR để đồng hồ của bé quét kết nối.
 
-----------------------------------------------------------------------
-MỤC 6: TÍNH NĂNG MỚI ĐỘC ĐÁO TỰ ĐỀ XUẤT (ĐẠT 1.0 / 1.0 ĐIỂM)
-----------------------------------------------------------------------
-- Trạm kiểm định an toàn phần cứng thiết bị trẻ em (Hardware QC Hub) dành cho Kỹ thuật viên (Staff):
-  + Kiểm tra độ phát xạ sóng vô tuyến (SAR / RF Radiation), độ sáng bảo vệ mắt bé, độ nhạy cảm biến GPS và dung lượng pin trước khi xuất xưởng cho phụ huynh.
-- Trợ lý AI OCR dịch tài liệu học tập và sách thiếu nhi cho bé ngay trong ứng dụng quản lý.
-- Nút bấm kết nối LiveKit Video Call trực tiếp tới Kỹ thuật viên từ từng thẻ thiết bị của bé khi gặp sự cố khẩn cấp.
+e. Tính năng tự đề xuất (1.0 điểm)
+- Trạm kiểm định an toàn thiết bị (QC Hub) cho nhân viên kỹ thuật: Đo mức độ phát xạ vô tuyến (SAR), kiểm tra độ sáng màn hình tránh hại mắt trẻ, kiểm tra độ nhạy GPS và dung lượng pin trước khi giao thiết bị cho phụ huynh.
 
-----------------------------------------------------------------------
-MỤC 7: GIAO DIỆN, CÀI ĐẶT & DEPLOY VPS (ĐẠT 1.0 / 1.0 ĐIỂM)
-----------------------------------------------------------------------
-1. Phần Cài đặt (Settings):
-   - Cho phép thay đổi cỡ chữ (Font Scaling: 85%, 100%, 115%, 130%) có màn hình xem trước và áp dụng toàn cục trên toàn bộ ứng dụng qua TextScaler.
-   - Cho phép thay đổi màu nền toàn bộ ứng dụng (7 bảng màu phủ trọn vẹn màn hình: Trắng tối giản, Xanh biển Ocean, Xanh lá Mint, Tím Lavender, Vàng cam Amber, Hồng phấn Sweet Rose, và Đen AMOLED Night Mode), lưu vào SharedPreferences.
-   - Cho phép cập nhật hồ sơ cá nhân (Họ tên, SĐT, Avatar biểu tượng, đổi mật khẩu) lưu trữ an toàn trong SharedPreferences.
-2. Giao diện & Trải nghiệm:
-   - Thiết kế chuẩn Material 3, phong cách Bento Grid hiện đại, màu sắc thân thiện với trẻ em và phụ huynh.
-3. Triển khai (Deploy):
-   - Backend ASP.NET Core Web API deploy chạy ổn định 24/7 trên VPS tên miền riêng: https://mobile.zeion.online/api.
-   - Tuyệt đối không dùng localhost, vượt qua mọi kiểm tra mạng của Hội đồng chấm thi.
-   - Kiểm tra mã nguồn với lệnh `dart analyze` đạt kết quả: No issues found! (0 lỗi, 0 cảnh báo).
+f. Giao diện & Cài đặt (1.0 điểm)
+- Thay đổi cỡ chữ: 4 mức kích thước (85%, 100%, 115%, 130%), áp dụng ngay lập tức trên toàn bộ ứng dụng qua TextScaler.
+- Thay đổi màu nền toàn app: 7 bộ màu nền (Trắng, Xanh biển Ocean, Xanh mint, Tím lavender, Vàng cam, Hồng, Đen AMOLED), phủ trọn vẹn màn hình và lưu vào SharedPreferences.
+- Cập nhật hồ sơ: Chỉnh sửa họ tên, số điện thoại, đổi avatar đại diện, đổi mật khẩu.
 
-======================================================================
-KẾT LUẬN:
-Dự án đã được thực hiện nghiêm túc, bám sát 100% đề thi, đáp ứng trọn vẹn cả yêu cầu tính năng, kiến trúc sạch (Clean Architecture), bảo mật 2 lớp OTP, và khả năng vận hành thực tế qua Internet.
-Điểm tự đánh giá khách quan và chân thật: 10 / 10 điểm.
-======================================================================
+4. BẢNG TỰ CHẤM ĐIỂM
+- Chức năng CRUD hệ thống: 4.5 / 4.5 điểm
+- 3 chức năng thuyết trình (Video Call, Dịch OCR, GPS/QR): 3.5 / 3.5 điểm
+- Tính năng mới tự đề xuất (Trạm kiểm định an toàn QC): 1.0 / 1.0 điểm
+- Giao diện, đổi cỡ chữ, đổi màu nền app, deploy VPS: 1.0 / 1.0 điểm
+-> Tổng điểm tự đánh giá: 10 / 10 điểm (hoặc 9.75 / 10 điểm nếu trừ nhẹ phần giao diện).
+
+5. HƯỚNG DẪN CÀI ĐẶT & CHẠY THỬ
+- Yêu cầu môi trường: Flutter SDK 3.13+, Dart 3.1+, Android Studio hoặc VS Code.
+- Lệnh lấy thư viện: flutter pub get
+- Lệnh kiểm tra lỗi: dart analyze (kết quả hiện tại: No issues found)
+- Lệnh chạy app: flutter run
+- Lưu ý: Khuyên dùng máy thật có cảm biến vân tay (như Samsung Galaxy Tab S9) để thử được cả tính năng quét vân tay vật lý và quét camera OCR.
